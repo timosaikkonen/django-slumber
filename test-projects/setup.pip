@@ -1,5 +1,5 @@
 # Required by Slumber
-simplejson
+ujson
 httplib2
 dicttoxml
 dougrain

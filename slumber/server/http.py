@@ -3,7 +3,7 @@
     data.
 """
 import logging
-from simplejson import loads
+from ujson import loads
 
 from django.core.exceptions import ObjectDoesNotExist
 try:

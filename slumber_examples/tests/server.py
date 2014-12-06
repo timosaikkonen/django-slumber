@@ -1,5 +1,5 @@
-from datetime import date
-from simplejson import loads
+from datetime import datetime
+from ujson import loads
 from mock import patch, Mock
 
 from django.test import TestCase
@@ -16,7 +16,7 @@ from slumber_examples.tests import ConfigureUser
 
 class TestJSON(TestCase):
     def test_unicode_attributes(self):
-        d = date.today()
+        d = datetime.today()
         class Request(object):
             META = {}
             class user(object):
@@ -30,7 +30,7 @@ class TestJSON(TestCase):
         http_response = view(Request())
         content = loads(http_response.content)
         self.assertEquals(content, dict(
-            u = str(d),
+            u = int((d - datetime(1970, 1, 1)).total_seconds()),
             _meta = dict(status = 200, message = "OK", username = "testuser")))
 
 

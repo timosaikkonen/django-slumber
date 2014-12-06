@@ -1,5 +1,5 @@
 from mock import patch
-from simplejson import loads
+from ujson import loads
 
 from django.test import TestCase
 

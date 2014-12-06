@@ -1,5 +1,5 @@
 from mock import patch, Mock
-from simplejson import loads, dumps
+from ujson import loads, dumps
 from django.http import HttpResponse
 from django.test import TestCase
 from slumber.server import accept_handler
@@ -60,7 +60,7 @@ class TestUsingAcceptHandler(TestCase):
         settings.DEBUG = False
         test_str = 'just a fake content'
         mock_handler_list.return_value = []
-        test_result_str = '{"_meta": {"status": 200, "username": "testuser", "message": "OK"}, "fake_content": "just a fake content"}'
+        test_result_str = '{"_meta":{"status":200,"username":"testuser","message":"OK"},"fake_content":"just a fake content"}'
 
 
         @view_handler

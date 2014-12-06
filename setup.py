@@ -24,7 +24,7 @@ setup(
         'slumber_examples.nested1', 'slumber_examples.nested1.nested2',
         'slumber_ex_shop'],
     install_requires = [
-        'simplejson', 'httplib2', 'django-fost-authn >= 0.3.8', 'dicttoxml',
+        'ujson', 'httplib2', 'django-fost-authn >= 0.3.8', 'dicttoxml',
         'dougrain', 'BeautifulSoup'],
     classifiers = [
         "Development Status :: 3 - Alpha",

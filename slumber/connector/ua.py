@@ -12,7 +12,7 @@ from datetime import datetime
 from fost_authn.signature import fost_hmac_request_signature
 from httplib2 import Http
 import logging
-from simplejson import dumps, JSONDecodeError, loads
+from ujson import dumps, loads
 from urllib import urlencode
 from urlparse import parse_qs, urlparse
 
@@ -177,7 +177,7 @@ def _get(url, ttl, codes, headers):
             response.from_cache = True
     try:
         return response, loads(content)
-    except JSONDecodeError:
+    except Exception:
         return response, {}
 
 
@@ -211,7 +211,7 @@ def _delete(url, codes, headers):
         assert response.status in codes, (url, response, content)
     try:
         return response, loads(content)
-    except JSONDecodeError:
+    except Exception:
         return response, {}
 
 
@@ -248,7 +248,7 @@ def _put(url, data, codes, headers):
         assert response.status in codes, (url, response, content)
     try:
         return response, loads(content)
-    except JSONDecodeError:
+    except Exception:
         return response, {}
 
 
@@ -286,6 +286,6 @@ def _post(url, data, codes):
             (url, response, content)
     try:
         return response, loads(content)
-    except JSONDecodeError:
+    except Exception:
         return response, {}
 

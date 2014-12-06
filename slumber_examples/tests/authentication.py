@@ -1,7 +1,7 @@
 from datetime import datetime
 import logging
 from mock import patch
-from simplejson import loads
+from ujson import loads
 
 from django.conf import settings
 from django.contrib.auth.models import User, Permission

@@ -1,7 +1,7 @@
 """
     Implements the JSON formatting for the server.
 """
-from simplejson import dumps, JSONEncoder
+from ujson import dumps
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -40,16 +40,6 @@ def to_json_data(model, instance, fieldname, fieldmeta):
             return unicode(value)
 
 
-class _proxyEncoder(JSONEncoder):
-    """If we don't know how to deal with the attribute type we'll just
-    convert to a string and hope that's ok for now.
-    """
-    # An attribute inherited from JSONEncoder hide this method
-    # pylint: disable=E0202
-    def default(self, obj):
-        return unicode(obj)
-
-
 def as_json(_request, response, content_type):
     """Implement the default accept handling which will return JSON data.
     """
@@ -58,13 +48,9 @@ def as_json(_request, response, content_type):
         to_dump = response[response.root]
     else:
         to_dump = response
-    if settings.DEBUG:
-        dump_content = dumps(
-            to_dump, indent=4,
-            cls=_proxyEncoder)
-    else:
-        dump_content = dumps(
-            to_dump, cls=_proxyEncoder)
+    
+    dump_content = dumps(
+        to_dump)
 
     if content_type is not None and 'charset' not in content_type:
         content_type += '; charset=utf-8'
